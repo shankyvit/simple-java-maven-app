@@ -13,9 +13,8 @@ pipeline {
         }
    
 
-       stage('Test') {
-		steps{
-
+        stage('Test') {
+	    steps{
 			sh 'mvn test'  
 		}	 
 	 	
@@ -24,13 +23,24 @@ pipeline {
 
 				junit 'target/surefire-reports/*.xml'
 
-		}
-		
-
+			}
 
 		}
 
 
-} 
+	} 
+
+	stage('Deploy') {
+            steps{
+                        sh './jenkins/scripts/deliver.sh'  
+                }
+
+
+        }
+
+
+
+
+
 }	 
 }
